@@ -129,7 +129,7 @@
       </div>
     </div>
     <!-- Static sidebar for desktop -->
-    <div class="hidden lg:flex lg:flex-shrink-0" x-data="{viewProfile : false}">
+    <div class="hidden lg:flex lg:flex-shrink-0" x-data="{viewProfile : false, changePass : false}">
       <div class="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-800">
         <div class="flex items-center flex-shrink-0 px-6">
           <img class="h-9 w-auto" src="https://cashlog.app/img/logo.png?v=20190410-01" alt="Workflow">
@@ -180,7 +180,7 @@
                     role="menuitem" @click = "viewProfile = true">View profile</a>
                   <a href="#"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                    role="menuitem">Change Password</a>
+                    role="menuitem" @click = "changePass = true">Change Password</a>
                   <a href="#"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                     role="menuitem">Notifications</a>
@@ -243,6 +243,32 @@
             </div>
           </div>
           <!--View Profile-->
+          <!--Change Password-->
+          <div class="fixed w-full h-full z-10 top-0 left-0 bg-gray-800 bg-opacity-25"
+          x-show.transition.in.duration.200ms.out.duration.50ms="changePass">
+          <div
+            class="flex flex-col border border-cool-gray-500 xl:w-4/12 md:w-8/12 w-10/12 m-auto transform translate-y-20 md:translate-y-40 rounded-lg bg-white shadow-xl px-8 lg:px-2 py-6 md:py-0">
+            <div>
+              <form action="" class="flex justify-center items-center flex-col md:px-12 md:py-10">
+                <h3 class="text-center font-bold text-lg md:text-2xl mb-6">Change Password</h3>
+                
+                <input type="text" placeholder="New Password"
+                  class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7" >
+                 
+                  <input type="text" placeholder="Confirm New Password"
+                  class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7" >
+
+                <div class="w-full flex flex-col">
+                  <button @click="changePass = false" type="button"
+                    class="border border-green-600 py-2 px-6 text-sm text-green-600 rounded-lg bg-white focus:outline-none leading-7 font-semibold tracking-wide w-full block mb-6">Cancel</button>
+                  <button type="submit"
+                    class="bg-green-600 text-sm py-2 px-6 rounded-lg focus:outline-none text-white leading-7 font-semibold tracking-wide hover:bg-green-500">Update Password</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!--Change Password-->
           </div>
           <!-- Sidebar Search -->
           <div class="px-3 mt-5">
