@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Transactions</title>
   <link href="https://unpkg.com/tailwindcss@1.6.2/dist/tailwind.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 </head>
 
 <body>
@@ -126,7 +127,7 @@
       </div>
     </div>
     <!-- Static sidebar for desktop -->
-    <div class="hidden lg:flex lg:flex-shrink-0">
+    <div class="hidden lg:flex lg:flex-shrink-0" x-data="{viewProfile : false, changePass : false}">
       <div class="flex flex-col w-64 border-r border-gray-200 pt-5 pb-4 bg-gray-800">
         <div class="flex items-center flex-shrink-0 px-6">
           <img class="h-9 w-auto" src="https://cashlog.app/img/logo.png?v=20190410-01" alt="Workflow">
@@ -174,10 +175,10 @@
                 <div class="py-1">
                   <a href="#"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                    role="menuitem">View profile</a>
+                    role="menuitem" @click = "viewProfile = true">View profile</a>
                   <a href="#"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
-                    role="menuitem">Settings</a>
+                    role="menuitem" @click = "changePass = true">Change Password</a>
                   <a href="#"
                     class="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900"
                     role="menuitem">Notifications</a>
@@ -199,6 +200,73 @@
                 </div>
               </div>
             </div>
+             <!--View Profile-->
+             <div class="fixed w-full h-full z-10 top-0 left-0 bg-gray-800 bg-opacity-25"
+             x-show.transition.in.duration.200ms.out.duration.50ms="viewProfile">
+             <div
+               class="flex flex-col border border-cool-gray-500 xl:w-4/12 md:w-8/12 w-10/12 m-auto transform translate-y-20 md:translate-y-40 rounded-lg bg-white shadow-xl px-8 lg:px-2 py-6 md:py-0">
+               <div>
+                 <form action="" class="flex justify-center items-center flex-col md:px-12 md:py-10">
+                   <h3 class="text-center font-bold text-lg md:text-2xl">Update Profile</h3>
+                   <a
+                     class="h-20 w-20 rounded-full overflow-hidden bg-gray-100 flex justify-center items-center cursor-pointer my-4">
+                     <!-- <svg
+                       fill="currentColor" viewBox="0 0 24 24"
+                       class="h-full w-full text-gray-300 hover:opacity-50">
+                       <path
+                         d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z">
+                       </path>
+                     </svg>  -->
+                     <img class="w-15 h-15 bg-gray-300 rounded-full flex-shrink-0" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=3&amp;w=256&amp;h=256&amp;q=80" alt="">
+                     <svg fill="currentColor" viewBox="0 0 20 20"
+                       class="-ml-1 mr-2 h-5 w-5 absolute text-gray-800">
+                       <path
+                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                       </path>
+                     </svg></a>
+                   <input type="text" placeholder="Name"
+                     class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7" value="Jessy Schwarz">
+                    
+                     <input type="text" placeholder="Email"
+                     class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7" value="jessy.schwarz@xyz.com">
+
+                   <div class="w-full flex flex-col">
+                     <button @click="viewProfile = false" type="button"
+                       class="border border-green-600 py-2 px-6 text-sm text-green-600 rounded-lg bg-white focus:outline-none leading-7 font-semibold tracking-wide w-full block mb-6">Cancel</button>
+                     <button type="submit"
+                       class="bg-green-600 text-sm py-2 px-6 rounded-lg focus:outline-none text-white leading-7 font-semibold tracking-wide hover:bg-green-500">Update</button>
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+           <!--View Profile-->
+           <!--Change Password-->
+          <div class="fixed w-full h-full z-10 top-0 left-0 bg-gray-800 bg-opacity-25"
+          x-show.transition.in.duration.200ms.out.duration.50ms="changePass">
+          <div
+            class="flex flex-col border border-cool-gray-500 xl:w-4/12 md:w-8/12 w-10/12 m-auto transform translate-y-20 md:translate-y-40 rounded-lg bg-white shadow-xl px-8 lg:px-2 py-6 md:py-0">
+            <div>
+              <form action="" class="flex justify-center items-center flex-col md:px-12 md:py-10">
+                <h3 class="text-center font-bold text-lg md:text-2xl mb-6">Change Password</h3>
+                
+                <input type="text" placeholder="New Password"
+                  class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7" >
+                 
+                  <input type="text" placeholder="Confirm New Password"
+                  class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7" >
+
+                <div class="w-full flex flex-col">
+                  <button @click="changePass = false" type="button"
+                    class="border border-green-600 py-2 px-6 text-sm text-green-600 rounded-lg bg-white focus:outline-none leading-7 font-semibold tracking-wide w-full block mb-6">Cancel</button>
+                  <button type="submit"
+                    class="bg-green-600 text-sm py-2 px-6 rounded-lg focus:outline-none text-white leading-7 font-semibold tracking-wide hover:bg-green-500">Update Password</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!--Change Password-->
           </div>
           <!-- Sidebar Search -->
           <div class="px-3 mt-5">
@@ -426,8 +494,8 @@
                   </svg>
                 </button>
               </div>
-              <div class="ml-3 flex space-x-3 relative">
-                <button id="account-edit" type="button"
+              <div class="ml-3 flex space-x-3 relative" x-data="{customerProfileEdit : false}">
+                <button id="account-edit" type="button" 
                   class="inline-flex items-center text-sm leading-5 font-medium text-cool-gray-700 bg-white hover:text-cool-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-cool-gray-800 active:bg-cool-gray-50 transition duration-150 ease-in-out">
                   <img class="h-12 w-12 rounded-full sm:block"
                     src="https://pngimage.net/wp-content/uploads/2018/06/john-doe-png.png" alt="">
@@ -446,15 +514,54 @@
                     aria-labelledby="user-menu">
                     <a href="#"
                       class="block px-4 py-2 text-sm text-cool-gray-700 hover:bg-cool-gray-100 transition ease-in-out duration-150"
-                      role="menuitem">Your Profile</a>
-                    <a href="#"
-                      class="block px-4 py-2 text-sm text-cool-gray-700 hover:bg-cool-gray-100 transition ease-in-out duration-150"
-                      role="menuitem">Settings</a>
-                    <a href="#"
-                      class="block px-4 py-2 text-sm text-cool-gray-700 hover:bg-cool-gray-100 transition ease-in-out duration-150"
-                      role="menuitem">Logout</a>
+                      role="menuitem" @click ="customerProfileEdit = true">Edit Profile</a>
                   </div>
                 </div>
+                 <!--Add Person-->
+             <div class="fixed w-full h-full z-10 top-0 left-0 bg-gray-800 bg-opacity-25"
+             x-show.transition.in.duration.200ms.out.duration.50ms="customerProfileEdit">
+             <div
+               class="flex flex-col border border-cool-gray-500 xl:w-4/12 md:w-8/12 w-10/12 m-auto transform translate-y-20 md:translate-y-40 rounded-lg bg-white shadow-xl px-8 lg:px-2 py-6 md:py-0">
+               <div>
+                 <form action="" class="flex justify-center items-center flex-col md:px-12 md:py-10">
+                   <h3 class="text-center font-bold text-lg md:text-2xl">Edit Account</h3>
+                   <a
+                     class="h-20 w-20 rounded-full overflow-hidden bg-gray-100 flex justify-center items-center cursor-pointer my-4">
+                     <!-- <svg
+                       fill="currentColor" viewBox="0 0 24 24"
+                       class="h-full w-full text-gray-300 hover:opacity-50">
+                       <path
+                         d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z">
+                       </path>
+                     </svg>  -->
+                     <img class="h-15 w-15 rounded-full md:block" src="https://pngimage.net/wp-content/uploads/2018/06/john-doe-png.png" alt="">
+                     <svg fill="currentColor" viewBox="0 0 20 20"
+                       class="-ml-1 mr-2 h-5 w-5 absolute text-gray-800">
+                       <path
+                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z">
+                       </path>
+                     </svg></a>
+                     <input type="text" placeholder="Name"
+                     class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7" value="John Doe">
+                     <input type="text" placeholder="Phone (Optional)"
+                     class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7">
+                     <input type="text" placeholder="Email (Optional)"
+                     class="w-full border border-cool-gray-500 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7">
+                   <div class="w-full flex flex-col">
+                     <button @click="customerProfileEdit = false" type="button"
+                       class="border border-green-600 py-2 px-6 text-sm text-green-600 rounded-lg bg-white focus:outline-none leading-7 font-semibold tracking-wide w-full block mb-6">Cancel</button>
+                     <button type="submit"
+                       class="mb-6 bg-green-600 text-sm py-2 px-6 rounded-lg focus:outline-none text-white leading-7 font-semibold tracking-wide hover:bg-green-500">Update</button>
+                   </div>
+                   <div>
+                    <a class="text-red-700 font-medium cursor-pointer flex items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" class="h-4 w-4 text-red-700 mr-2"><path d="M6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"></path></svg>
+                      Delete this account</a>
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+           <!--Add Person-->
               </div>
             </div>
           </div>
@@ -507,19 +614,65 @@
                 </div>
               </div>
             </div>
-            <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4 justify-center">
+            <div class="mt-6 flex space-x-3 md:mt-0 md:ml-4 justify-center" x-data="{gave:false, got:false}">
               <span class="shadow-sm rounded-md">
-                <button type="button"
+                <button type="button" @click ="gave = true"
                   class="inline-flex items-center px-6 py-3 md:px-4 md:py-2 text-sm leading-5 font-medium rounded-md text-white bg-red-700 hover:bg-red-600 focus:outline-none active:text-cool-gray-800 transition duration-150 ease-in-out">
                   YOU GAVE &#x20B9
                 </button>
               </span>
               <span class="shadow-sm rounded-md">
-                <button type="button"
+                <button type="button" @click = "got =true"
                   class="inline-flex items-center px-6 py-3 md:px-4 md:py-2 text-sm leading-5 font-medium rounded-md text-white bg-green-700 hover:bg-green-600 focus:outline-none active:text-cool-gray-800 transition duration-150 ease-in-out">
                   YOU GOT &#x20B9
                 </button>
               </span>
+               <!--You gave-->
+               <div class="fixed w-full h-full z-10 top-0 left-0 bg-gray-800 bg-opacity-25"
+               x-show.transition.in.duration.200ms.out.duration.50ms="gave">
+               <div
+                 class="flex flex-col border border-cool-gray-500 xl:w-4/12 md:w-8/12 w-10/12 m-auto transform translate-y-20 md:translate-y-40 rounded-lg bg-white shadow-xl px-8 lg:px-2 py-6 md:py-0">
+                 <div>
+                   <form action="" class="flex justify-center flex-col md:px-12 md:py-10">
+                     <h3 class="text-center font-bold text-lg md:text-2xl text-red-600 mb-6">You gave John Doe</h3>
+                     <label for="" class="text-red-600 font-semibold mb-4">How Much</label>
+                     <input type="text" placeholder="0.00 &#x20B9"
+                       class="w-full border border-red-600 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7 text-red-600">
+                      
+                     <div class="w-full flex ">
+                       <button @click="gave = false" type="button"
+                         class="border border-cool-gray-400 py-2 px-6 text-sm text-gray-500 rounded-lg bg-white focus:outline-none leading-7 font-semibold tracking-wide mr-3">Cancel</button>
+                       <button type="submit"
+                         class="bg-red-600 text-sm py-2 px-6 rounded-lg focus:outline-none text-white leading-7 font-semibold tracking-wide hover:bg-red-500">Save</button>
+                     </div>
+                   </form>
+                 </div>
+               </div>
+             </div>
+             <!--You gave-->
+             <!--You got-->
+             <div class="fixed w-full h-full z-10 top-0 left-0 bg-gray-800 bg-opacity-25"
+             x-show.transition.in.duration.200ms.out.duration.50ms="got">
+             <div
+               class="flex flex-col border border-cool-gray-500 xl:w-4/12 md:w-8/12 w-10/12 m-auto transform translate-y-20 md:translate-y-40 rounded-lg bg-white shadow-xl px-8 lg:px-2 py-6 md:py-0">
+               <div>
+                 <form action="" class="flex justify-center flex-col md:px-12 md:py-10">
+                   <h3 class="text-center font-bold text-lg md:text-2xl text-green-600 mb-6">John Doe gave you</h3>
+                   <label for="" class="text-green-600 font-semibold mb-4">How Much</label>
+                   <input type="text" placeholder="0.00 &#x20B9"
+                     class="w-full border border-green-600 rounded-lg px-3 py-2 focus:outline-none text-sm mb-6 leading-7 text-green-600">
+                    
+                   <div class="w-full flex ">
+                     <button @click="got = false" type="button"
+                       class="border border-cool-gray-400 py-2 px-6 text-sm text-gray-500 rounded-lg bg-white focus:outline-none leading-7 font-semibold tracking-wide mr-3">Cancel</button>
+                     <button type="submit"
+                       class="bg-green-600 text-sm py-2 px-6 rounded-lg focus:outline-none text-white leading-7 font-semibold tracking-wide hover:bg-green-500">Save</button>
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+           <!--You got-->
             </div>
           </div>
         </div>
